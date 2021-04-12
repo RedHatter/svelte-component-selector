@@ -2,16 +2,29 @@
   "name": "svelte-component-selector",
   "version": "1.0.0",
   "description": "Implements a Component CSS selector for svelte",
-  "main": "index.mjs",
+  "main": "dist/index.js",
+  "module": "index.js",
   "author": "Ava Johnson",
   "repository": "https://github.com/RedHatter/svelte-component-selector",
+  "keywords": [
+    "svelte",
+    "preprocess",
+    "css",
+    "selector"
+  ],
+  "scripts": {
+    "prebuild": "rm -rf dist/",
+    "build": "babel index.js --out-file dist/index.js"
+  },
   "license": "MIT",
   "devDependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.15",
+    "@babel/plugin-transform-modules-commonjs": "^7.13.8",
     "magic-string": "^0.25.7",
     "svelte": "^3.37.0"
   },
   "peerDependencies": {
-    "magic-string": "^0.25.7",
     "svelte": "^3.37.0"
   }
 }
