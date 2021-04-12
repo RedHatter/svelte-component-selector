@@ -2,11 +2,10 @@
   "name": "svelte-component-selector",
   "version": "1.0.0",
   "description": "Implements a Component CSS selector for svelte",
-  "main": "index.js",
+  "main": "index.mjs",
   "author": "Ava Johnson",
   "repository": "https://github.com/RedHatter/svelte-component-selector",
   "license": "MIT",
-  "type": "module",
   "devDependencies": {
     "magic-string": "^0.25.7",
     "svelte": "^3.37.0"
