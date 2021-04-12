@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Implements a Component CSS selector for svelte",
   "main": "dist/index.js",
-  "module": "index.js",
+  "module": "index.mjs",
   "author": "Ava Johnson",
   "repository": "https://github.com/RedHatter/svelte-component-selector",
   "keywords": [
@@ -14,7 +14,8 @@
   ],
   "scripts": {
     "prebuild": "rm -rf dist/",
-    "build": "babel index.js --out-file dist/index.js"
+    "build": "babel index.mjs --out-file dist/index.js",
+    "prepare": "npm run build"
   },
   "license": "MIT",
   "devDependencies": {
