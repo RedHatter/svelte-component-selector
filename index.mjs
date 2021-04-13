@@ -54,16 +54,18 @@ export default function (cssHash = defaultCssHash, propName = '_$$class') {
     markup: async ({ content, filename }) => {
       let css = undefined
       let script = undefined
-      content = await preprocess(content, {
-        script: ({ content }) => {
-          script = content
-          return { code: '/* script-marker */' }
-        },
-        style: ({ content }) => {
-          css = content
-          return { code: '/* css-marker */' }
-        },
-      })
+      content = (
+        await preprocess(content, {
+          script: ({ content }) => {
+            script = content
+            return { code: '/* script-marker */' }
+          },
+          style: ({ content }) => {
+            css = content
+            return { code: '/* css-marker */' }
+          },
+        })
+      ).code
 
       const ast = parse(content, { filename })
       const magicContent = new MagicString(content)
