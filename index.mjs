@@ -51,9 +51,21 @@ function defaultCssHash({ hash, css, parent, child, filename }) {
 
 export default function (cssHash = defaultCssHash, propName = '_$$class') {
   return {
-    markup: ({ content, filename }) => {
+    markup: async ({ content, filename }) => {
+      let css = undefined
+      let script = undefined
+      content = await svelte.preprocess(content, {
+        script: ({ content }) => {
+          script = content
+          return { code: '/* script-marker */' }
+        },
+        style: ({ content }) => {
+          css = content
+          return { code: '/* css-marker */' }
+        },
+      })
+
       const ast = parse(content, { filename })
-      const css = ast.css?.content?.styles
       const magicContent = new MagicString(content)
 
       walk(ast.html, {
@@ -105,7 +117,10 @@ export default function (cssHash = defaultCssHash, propName = '_$$class') {
       })
 
       return {
-        code: magicContent.toString(),
+        code: magicContent
+          .toString()
+          .replace('/* css-marker */', css)
+          .replace('/* script-marker */', script),
         map: magicContent.generateMap({ source: filename }).toString(),
       }
     },
