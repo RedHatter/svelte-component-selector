@@ -1,4 +1,4 @@
-import { parse, walk } from 'svelte/compiler'
+import { preprocess, parse, walk } from 'svelte/compiler'
 import MagicString from 'magic-string'
 
 function isUpperCase(char) {
@@ -54,7 +54,7 @@ export default function (cssHash = defaultCssHash, propName = '_$$class') {
     markup: async ({ content, filename }) => {
       let css = undefined
       let script = undefined
-      content = await svelte.preprocess(content, {
+      content = await preprocess(content, {
         script: ({ content }) => {
           script = content
           return { code: '/* script-marker */' }
